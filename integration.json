@@ -1,10 +1,10 @@
 {
   "builders": [
-    "index.docker.io/initializbuildpacks/securepacks-initzbuilder"
+    "paketobuildpacks/builder-jammy-buildpackless-full"
   ],
   "ubi-nodejs-extension": "github.com/paketo-community/ubi-nodejs-extension",
   "build-plan": "github.com/paketo-community/build-plan",
-  "nginx": "github.com/initializ-buildpacks/nginx",
-  "node-engine": "github.com/initializ-buildpacks/node-engine",
-  "node-run-script": "github.com/initializ-buildpacks/node-run-script"
+  "nginx": "github.com/paketo-buildpacks/nginx",
+  "node-engine": "github.com/paketo-buildpacks/node-engine",
+  "node-run-script": "github.com/paketo-buildpacks/node-run-script"
 }
