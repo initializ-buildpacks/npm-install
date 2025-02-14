@@ -49,7 +49,7 @@ func (r InstallBuildProcess) Run(modulesDir, cacheDir, workingDir, npmrcPath str
 		environment = append(environment, "NODE_ENV=development")
 	}
 
-	args := []string{"install", "--unsafe-perm", "--cache", "--force", cacheDir}
+	args := []string{"install", "--unsafe-perm", "--cache", cacheDir, "--force"}
 	r.logger.Subprocess("Running 'npm %s'", strings.Join(args, " "))
 
 	err = r.executable.Execute(pexec.Execution{
