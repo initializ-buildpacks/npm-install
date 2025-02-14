@@ -82,7 +82,7 @@ func testInstallBuildProcess(t *testing.T, context spec.G, it spec.S) {
 		context("launch is false", func() {
 			it("succeeds", func() {
 				Expect(process.Run(modulesDir, cacheDir, workingDir, "some-npmrc-path", false)).To(Succeed())
-				Expect(executable.ExecuteCall.Receives.Execution.Args).To(Equal([]string{"install", "--unsafe-perm", "--cache", cacheDir}))
+				Expect(executable.ExecuteCall.Receives.Execution.Args).To(Equal([]string{"install", "--unsafe-perm", "--cache", "--force", cacheDir}))
 				Expect(executable.ExecuteCall.Receives.Execution.Dir).To(Equal(workingDir))
 				Expect(executable.ExecuteCall.Receives.Execution.Env).To(Equal(append(os.Environ(), "NPM_CONFIG_LOGLEVEL=some-val", "NPM_CONFIG_GLOBALCONFIG=some-npmrc-path", "NODE_ENV=development")))
 				Expect(buffer.String()).To(ContainLines(
@@ -100,7 +100,7 @@ func testInstallBuildProcess(t *testing.T, context spec.G, it spec.S) {
 		context("launch is true", func() {
 			it("succeeds", func() {
 				Expect(process.Run(modulesDir, cacheDir, workingDir, "some-npmrc-path", true)).To(Succeed())
-				Expect(executable.ExecuteCall.Receives.Execution.Args).To(Equal([]string{"install", "--unsafe-perm", "--cache", cacheDir}))
+				Expect(executable.ExecuteCall.Receives.Execution.Args).To(Equal([]string{"install", "--unsafe-perm", "--cache", cacheDir, "--force"}))
 				Expect(executable.ExecuteCall.Receives.Execution.Dir).To(Equal(workingDir))
 				Expect(executable.ExecuteCall.Receives.Execution.Env).To(Equal(append(os.Environ(), "NPM_CONFIG_LOGLEVEL=some-val", "NPM_CONFIG_GLOBALCONFIG=some-npmrc-path")))
 				Expect(buffer.String()).To(ContainLines(
@@ -155,7 +155,7 @@ func testInstallBuildProcess(t *testing.T, context spec.G, it spec.S) {
 				it("returns an error", func() {
 					err := process.Run(modulesDir, cacheDir, workingDir, "", true)
 					Expect(buffer.String()).To(ContainLines(
-						fmt.Sprintf("    Running 'npm install --unsafe-perm --cache %s'", cacheDir),
+						fmt.Sprintf("    Running 'npm install --unsafe-perm --cache %s'", cacheDir, " --force"),
 						"      install error on stdout",
 						"      install error on stderr",
 					))
